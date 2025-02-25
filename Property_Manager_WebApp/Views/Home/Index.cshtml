@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container mt-5 text-center">
+    <!-- Image Section -->
+    <div class="mb-4">
+        <img src="~/images/welcome.png" alt="Welcome Image" class="img-fluid rounded" style="max-width: 600px; height: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" />
+    </div>
+
+    <!-- Text Section -->
+    <h1 class="display-4">Welcome to Property Rental Manager</h1>
+    <p class="lead">
+        Manage your properties, tenants, and appointments efficiently with our modern and sleek platform.
+    </p>
+
+    <div class="mt-4">
+        <a href="/Account/Login" class="btn btn-primary btn-lg">Login</a>
+        <a href="/Account/SignUp" class="btn btn-secondary btn-lg">Sign Up</a>
+    </div>
+
+    <!-- Guest Access -->
+    <div class="mt-4">
+        <a href="/Apartments/Index" class="btn btn-info btn-lg">View Apartments as Guest</a>
+    </div>
+</div>

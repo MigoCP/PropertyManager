@@ -1,0 +1,49 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@{
+    var userName = HttpContextAccessor.HttpContext.Session.GetString("UserName");
+    ViewData["Title"] = "Owner Home";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center">Welcome, @userName</h2>
+    <p class="text-center">What would you like to do today?</p>
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0 text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Your Managers</h5>
+                    <p class="card-text">View and manage your managers.</p>
+                    <a class="btn btn-primary" asp-controller="Users" asp-action="Index" asp-route-role="Manager">View</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0 text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Create Manager</h5>
+                    <p class="card-text">Add a new manager to your team.</p>
+                    <a class="btn btn-primary" asp-controller="Users" asp-action="Create" asp-route-role="Manager">Create</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0 text-center">
+                <div class="card-body">
+                    <h5 class="card-title">View Tenants</h5>
+                    <p class="card-text">Check potential tenants for your properties.</p>
+                    <a class="btn btn-primary" asp-controller="Users" asp-action="TenantsIndex">View</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0 text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Reports to You</h5>
+                    <p class="card-text">View reports submitted to you.</p>
+                    <a class="btn btn-primary" asp-controller="Reports" asp-action="OwnerIndex">View</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

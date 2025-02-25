@@ -1,0 +1,58 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@{
+    var userName = HttpContextAccessor.HttpContext.Session.GetString("UserName");
+    ViewData["Title"] = "Tenant Home";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center">Welcome, @userName</h2>
+    <p class="text-center">What would you like to do today?</p>
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0 text-center">
+                <div class="card-body">
+                    <h5 class="card-title">See Apartments</h5>
+                    <p class="card-text">View all available apartments.</p>
+                    <a class="btn btn-primary" asp-controller="Apartments" asp-action="TenantIndex">View</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0 text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Your Appointments</h5>
+                    <p class="card-text">Check your scheduled appointments.</p>
+                    <a class="btn btn-primary" asp-controller="Appointments" asp-action="Index">View</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0 text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Make Appointment</h5>
+                    <p class="card-text">Schedule a new appointment.</p>
+                    <a class="btn btn-primary" asp-controller="Appointments" asp-action="Create">Schedule</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0 text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Your Messages</h5>
+                    <p class="card-text">View messages from your manager.</p>
+                    <a class="btn btn-primary" asp-controller="Messages" asp-action="Index">View</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0 text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Send Message</h5>
+                    <p class="card-text">Send a message to your manager.</p>
+                    <a class="btn btn-primary" asp-controller="Messages" asp-action="Create">Send</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@{
+    var userName = HttpContextAccessor.HttpContext.Session.GetString("UserName");
+    ViewData["Title"] = "Manager Home";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center">Welcome, @userName</h2>
+    <p class="text-center">What would you like to do today?</p>
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0 text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Your Apartments</h5>
+                    <p class="card-text">Manage apartments under your supervision.</p>
+                    <a class="btn btn-primary" asp-controller="Apartments" asp-action="ManagerIndex">View</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0 text-center">
+                <div class="card-body">
+                    <h5 class="card-title">New Apartment</h5>
+                    <p class="card-text">Add a new apartment to your building.</p>
+                    <a class="btn btn-primary" asp-controller="Apartments" asp-action="Create">Add</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0 text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Your Appointments</h5>
+                    <p class="card-text">Manage appointments with tenants.</p>
+                    <a class="btn btn-primary" asp-controller="Appointments" asp-action="Index">View</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0 text-center">
+                <div class="card-body">
+                    <h5 class="card-title">New Appointment</h5>
+                    <p class="card-text">Schedule a new appointment.</p>
+                    <a class="btn btn-primary" asp-controller="Appointments" asp-action="Create">Schedule</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0 text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Your Messages</h5>
+                    <p class="card-text">Check messages from tenants or owners.</p>
+                    <a class="btn btn-primary" asp-controller="Messages" asp-action="Index">View</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0 text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Your Reports</h5>
+                    <p class="card-text">Submit or manage reports to owners.</p>
+                    <a class="btn btn-primary" asp-controller="Reports" asp-action="ManagerIndex">View</a>
+                    <a class="btn btn-success mt-2" asp-controller="Reports" asp-action="Create">Create</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

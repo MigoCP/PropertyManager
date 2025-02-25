@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Property_Manager_WebApp.Models.Report>
+
+<h1>Your Reports</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Title)</th>
+            <th>@Html.DisplayNameFor(model => model.Description)</th>
+            <th>@Html.DisplayNameFor(model => model.ReportDate)</th>
+            <th>@Html.DisplayNameFor(model => model.Status)</th>
+            <th>@Html.DisplayNameFor(model => model.Owner.FullName)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var report in Model)
+        {
+            <tr>
+                <td>@report.Title</td>
+                <td>@report.Description</td>
+                <td>@report.ReportDate.ToShortDateString()</td>
+                <td>@report.Status</td>
+                <td>@report.Owner.FullName</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@report.ReportId">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

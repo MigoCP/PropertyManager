@@ -1,0 +1,41 @@
+﻿@model Property_Manager_WebApp.Models.Apartment
+
+@{
+    ViewData["Title"] = "Apartment Details";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <!-- Image Section -->
+        <img src="~/images/apartments/@($"{Model.ApartmentId}.png")" class="card-img-top" alt="Apartment Image" style="height: 400px; object-fit: cover;">
+
+        <!-- Card Body -->
+        <div class="card-body">
+            <h2 class="card-title text-center mb-4">Apartment @Model.Address</h2>
+
+            <!-- Apartment Details -->
+            <dl class="row">
+                <dt class="col-sm-4">Address:</dt>
+                <dd class="col-sm-8">@Model.Address</dd>
+
+                <dt class="col-sm-4">Description:</dt>
+                <dd class="col-sm-8">@Model.Description</dd>
+
+                <dt class="col-sm-4">Status:</dt>
+                <dd class="col-sm-8"><span class="badge bg-info text-dark">@Model.Status</span></dd>
+
+                <dt class="col-sm-4">Building:</dt>
+                <dd class="col-sm-8">@Model.Building.Name</dd>
+
+                <dt class="col-sm-4">Number of Rooms:</dt>
+                <dd class="col-sm-8">@Model.NumberOfRooms</dd>
+            </dl>
+
+            <!-- Action Buttons -->
+            <div class="mt-4 d-flex justify-content-between">
+                <a asp-action="Edit" asp-route-id="@Model.ApartmentId" class="btn btn-secondary">Edit</a>
+                <a asp-action="Index" class="btn btn-primary">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>

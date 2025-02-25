@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Sign Up";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center">Sign Up</h2>
+
+    <form asp-controller="Account" asp-action="SignUp" method="post">
+        <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" name="fullName" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="role">Role</label>
+            <select id="role" name="role" class="form-control">
+                <option value="Owner">Owner</option>
+                <option value="Manager">Manager</option>
+                <option value="Tenant">Tenant</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+    </form>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger mt-3">@ViewBag.Error</div>
+    }
+</div>

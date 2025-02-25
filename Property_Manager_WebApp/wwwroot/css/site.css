@@ -1,0 +1,174 @@
+/* Typography and Global Spacing */
+html {
+    font-size: 16px;
+    font-family: 'Roboto', Arial, sans-serif; /* Modern typography */
+    color: #333;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    background-color: #f9f9f9; /* Light background */
+}
+
+/* Form Styles */
+form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+    form .form-group {
+        margin-bottom: 1rem;
+    }
+
+    form .form-control {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 1rem;
+    }
+
+    form .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: white;
+        font-size: 1rem;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+        form .btn-primary:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+/* Button Animation */
+.btn {
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+    .btn:hover {
+        opacity: 0.9;
+    }
+
+/* Alert Messages */
+.alert {
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+    table th, table td {
+        text-align: left;
+        padding: 12px;
+    }
+
+    table th {
+        background-color: #007bff; /* Blue header background */
+        color: black; /* White text */
+        text-transform: uppercase; /* Optional */
+        font-weight: bold; /* Optional */
+    }
+
+    table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    table tr:hover {
+        background-color: #e9ecef;
+        transition: background-color 0.3s ease;
+    }
+
+
+/* Headers and Titles */
+h1, h2, h4 {
+    color: #007bff;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+h4 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Links */
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+body, form, table {
+    animation: fadeIn 0.5s ease-in;
+}
+
+/* Ensure tables are responsive */
+.table-container {
+    overflow-x: auto; /* Enable horizontal scrolling */
+    margin-bottom: 1rem; /* Add spacing below the table */
+}
+
+/* Ensure footer stays at the bottom */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px; /* Adjust based on footer height */
+}
+
+/* Footer styling */
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px; /* Adjust height as needed */
+    background-color: #f8f9fa;
+    text-align: center;
+    line-height: 60px;
+}

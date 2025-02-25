@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Property_Manager_WebApp.Models.Appointment>
+
+@{
+    ViewData["Title"] = "Your appointments";
+}
+
+<h1>Your appointments</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ScheduledDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apartment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Manager)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tenant)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ScheduledDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apartment.ApartmentId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Manager.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tenant.FullName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.AppointmentId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.AppointmentId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.AppointmentId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

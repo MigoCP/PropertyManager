@@ -1,0 +1,117 @@
+﻿@model Property_Manager_WebApp.Models.Appointment
+
+@{
+    ViewData["Title"] = "Create Appointment";
+}
+
+<h1>Create Appointment</h1>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @if (ViewBag.IsTenant != null && (bool)ViewBag.IsTenant)
+            {
+                <div class="form-group">
+                    <label class="control-label">Tenant</label>
+                    <input type="text" class="form-control" value="@ViewBag.TenantName" readonly />
+                    <input type="hidden" name="TenantId" value="@ViewBag.TenantIdFixed" />
+                </div>
+            }
+            else
+            {
+                <div class="form-group">
+                    <label asp-for="TenantId" class="control-label"></label>
+                    <select asp-for="TenantId" asp-items="ViewBag.TenantDropdown" class="form-control"></select>
+                </div>
+            }
+
+
+            <div class="form-group">
+                <label asp-for="ManagerId" class="control-label"></label>
+                <select asp-for="ManagerId" asp-items="ViewBag.ManagerId" class="form-control" id="ManagerDropdown"></select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ApartmentId" class="control-label"></label>
+                <select asp-for="ApartmentId" asp-items="ViewBag.ApartmentId" class="form-control" id="ApartmentDropdown"></select>
+            </div>
+
+            <div class="form-group">
+                <label for="DayDropdown" class="control-label">Available Days</label>
+                <select class="form-control" id="DayDropdown" name="selectedDay">
+                    <option value="">-- Select Day --</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="TimeDropdown" class="control-label">Available Times</label>
+                <select class="form-control" id="TimeDropdown" name="selectedTime">
+                    <option value="">-- Select Time --</option>
+                </select>
+            </div>
+
+            <input type="hidden" asp-for="Status" value="Pending" />
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#ManagerDropdown').on('change', function () {
+                const managerId = $(this).val();
+                $('#DayDropdown').html('<option value="">-- Select Day --</option>');
+                $('#TimeDropdown').html('<option value="">-- Select Time --</option>');
+                $('#ApartmentDropdown').html('<option value="">-- Select Apartment --</option>');
+
+                if (managerId) {
+                    $.getJSON('/Appointments/GetApartmentsByManager', { managerId: managerId }, function (data) {
+                        let options = '<option value="">-- Select Apartment --</option>';
+                        data.forEach(apartment => {
+                            options += `<option value="${apartment.apartmentId}">${apartment.address}</option>`;
+                        });
+                        $('#ApartmentDropdown').html(options);
+                    });
+
+                    $.getJSON('/Appointments/GetAvailableDays', { managerId: managerId }, function (days) {
+                        let dayOptions = '<option value="">-- Select Day --</option>';
+                        days.forEach(day => {
+                            dayOptions += `<option value="${day}">${day}</option>`;
+                        });
+                        $('#DayDropdown').html(dayOptions);
+                    });
+                }
+            });
+
+            $('#DayDropdown').on('change', function () {
+                const managerId = $('#ManagerDropdown').val();
+                const dayOfWeek = $(this).val();
+                $('#TimeDropdown').html('<option value="">-- Select Time --</option>');
+
+                if (managerId && dayOfWeek) {
+                    $.getJSON('/Appointments/GetAvailableTimes', { managerId: managerId, dayOfWeek: dayOfWeek }, function (times) {
+                        let timeOptions = '<option value="">-- Select Time --</option>';
+                        times.forEach(time => {
+                            timeOptions += `<option value="${time}">${time}</option>`;
+                        });
+                        $('#TimeDropdown').html(timeOptions);
+                    });
+                }
+            });
+        });
+    </script>
+}

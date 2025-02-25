@@ -1,0 +1,93 @@
+﻿@model Property_Manager_WebApp.Models.Apartment
+
+@{
+    ViewData["Title"] = "Create Apartment";
+}
+
+<h1>Create Apartment</h1>
+
+<h4>Apartment</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- Building Dropdown -->
+            <div class="form-group">
+                <label asp-for="BuildingId" class="control-label"></label>
+                <select asp-for="BuildingId" class="form-control" asp-items="ViewBag.BuildingId" id="BuildingId"></select>
+                <span asp-validation-for="BuildingId" class="text-danger"></span>
+            </div>
+
+            <!-- Address (Read-Only) -->
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" id="AddressField" readonly />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            <!-- Number of Rooms -->
+            <div class="form-group">
+                <label asp-for="NumberOfRooms" class="control-label"></label>
+                <input asp-for="NumberOfRooms" class="form-control" />
+                <span asp-validation-for="NumberOfRooms" class="text-danger"></span>
+            </div>
+
+            <!-- Description -->
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <!-- Status -->
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <select asp-for="Status" class="form-control">
+                    <option value="Available">Available</option>
+                    <option value="Occupied">Occupied</option>
+                    <option value="Under Maintenance">Under Maintenance</option>
+                </select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+
+            <!-- Image Upload -->
+            <div class="form-group">
+                <label for="ApartmentImage">Upload Image</label>
+                <input type="file" class="form-control" name="ApartmentImage" id="ApartmentImage" />
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script>
+        // Populate address field based on selected building
+        document.getElementById("BuildingId").addEventListener("change", function () {
+            const buildingId = this.value;
+
+            // Fetch building address from server
+            fetch(`/Apartments/GetBuildingAddress?buildingId=${buildingId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        alert(data.error);
+                        document.getElementById("AddressField").value = ""; // Clear the address field
+                    } else {
+                        document.getElementById("AddressField").value = data.address; // Populate the address field
+                    }
+                })
+                .catch(error => console.error('Error fetching building address:', error));
+        });
+    </script>
+}
